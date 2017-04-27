@@ -3,10 +3,11 @@
 {% block body %}
 
 <form action="{{ url_for("login") }}" method="post">
-  <input name="username" placeholder="Username" type="text" required /><br />
-  <input name="password" placeholder="Password" type="password" required /><br />
+  <input id="username" name="username" placeholder="Username" type="text" required /><br />
+  <input id="password" name="password" placeholder="Password" type="password" required /><br />
   <p id="error">{{ error }}</p>
-  <input type="submit" />
+  <input id="submit" type="submit" disabled />
 </form>
 
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
 {% endblock %}
