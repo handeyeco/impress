@@ -1,0 +1,8 @@
+.timeline {
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.timeline > * {
+  padding: 20px;
+}

@@ -1,0 +1,9 @@
+.thumbnail {
+  display: inline-block;
+  text-align: center;
+}
+
+.thumbnail img {
+  max-width: 400px;
+  max-height: 400px;
+}
