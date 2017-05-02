@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import { Timeline } from './components/Timeline';
 import { PieceDetails } from './components/PieceDetails';
+import { PageLayout } from './components/PageLayout';
+import { PieceZoom } from './components/PieceZoom';
 
 import { db } from './mock';
 
@@ -24,10 +26,23 @@ class App extends Component {
       <Router>
         <div>
           <Route exact path="/"
-            render={() => <Timeline art={this.state.art} />}
+            render={() => (
+              <PageLayout>
+                <Timeline art={this.state.art} />
+              </PageLayout>
+            )}
           />
-          <Route path="/:id"
-            render={(props) => <PieceDetails piece={this.returnPieceByID(props.match.params.id)} />}
+        <Route exact path="/zoom/:id"
+            render={(props) => (
+              <PieceZoom piece={this.returnPieceByID(props.match.params.id)} />
+            )}
+          />
+        <Route exact path="/:id"
+            render={(props) => (
+              <PageLayout>
+                <PieceDetails piece={this.returnPieceByID(props.match.params.id)} />
+              </PageLayout>
+            )}
           />
         </div>
       </Router>

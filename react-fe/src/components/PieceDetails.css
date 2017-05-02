@@ -13,9 +13,10 @@
   padding-bottom: 20px;
 }
 
-.piece_image {
-  width: 500px;
-  height: 100%;
+.piece_image img {
+  max-width: 500px;
+  max-height: 500px;
+  object-fit: contain;
 }
 
 .piece_details {
