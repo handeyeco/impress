@@ -8,7 +8,7 @@ export class Thumbnail extends Component {
 
     return (
       <div className="thumbnail">
-        <Link to={"/" + piece.id}><img src={piece.small_image} alt={piece.title + " by " + piece.artist} /></Link>
+        <Link to={"/details/" + piece.id}><img src={piece.small_image} alt={piece.title + " by " + piece.artist} /></Link>
         <p>{piece.year_completed}</p>
       </div>
     )
