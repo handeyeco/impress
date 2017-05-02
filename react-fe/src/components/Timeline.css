@@ -1,6 +1,7 @@
 .timeline {
-  overflow-x: scroll;
-  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 
 .timeline > * {

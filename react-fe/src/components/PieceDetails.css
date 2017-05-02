@@ -1,0 +1,27 @@
+/** { border: 1px solid black; }*/
+
+.piece_container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.piece_container > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.piece_image {
+  width: 500px;
+  height: 100%;
+}
+
+.piece_details {
+  text-align: right;
+}
+
+.piece_description {
+  text-align: justify;
+}

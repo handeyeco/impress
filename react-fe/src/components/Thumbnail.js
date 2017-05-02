@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import "./Thumbnail.css";
 
 export class Thumbnail extends Component {
@@ -7,7 +8,7 @@ export class Thumbnail extends Component {
 
     return (
       <div className="thumbnail">
-        <img src={piece.small_image} alt={piece.title + " by " + piece.artist} />
+        <Link to={"/" + piece.id}><img src={piece.small_image} alt={piece.title + " by " + piece.artist} /></Link>
         <p>{piece.year_completed}</p>
       </div>
     )
