@@ -15,9 +15,9 @@ export class PieceDetails extends Component {
           </div>
           <div className="piece_details">
             <strong>{p.title}</strong><br />
-            {p.year_started === p.year_completed ? p.year_completed : p.year_started + " - " + p.year_completed}<br />
-            <em>by {p.artist}</em><br/>
-            <em>{p.born + " - " + p.died}</em>
+            {p.year_started === p.year_completed ? `ca. ${p.year_completed}` : `ca. ${p.year_started}-${p.year_completed}`}<br />
+            <em>{p.artist}</em><br/>
+            <em>{`${p.born}-${p.died}`}</em>
           </div>
         </div>
         <p className="piece_description">{p.description}</p>
