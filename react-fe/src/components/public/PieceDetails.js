@@ -6,21 +6,21 @@ import './PieceDetails.css';
 export const PieceDetails = props => {
   let p = props.piece;
   return (
-    <div className="piece_container">
+    <div className="piece-container">
       <div>
-        <div className="piece_image">
+        <div className="piece-image">
           <Link to={"/zoom/" + p.id}>
             <img src={p.small_image} alt={p.title + " by " + p.artist} />
           </Link>
         </div>
-        <div className="piece_details">
+        <div className="piece-details">
           <strong>{p.title}</strong><br />
           {p.year_started === p.year_completed ? `ca. ${p.year_completed}` : `ca. ${p.year_started}-${p.year_completed}`}<br />
           <em>{p.artist}</em><br/>
           <em>{`${p.born}-${p.died}`}</em>
         </div>
       </div>
-      <p className="piece_description">{p.description}</p>
+      <p className="piece-description">{p.description}</p>
     </div>
   )
 }

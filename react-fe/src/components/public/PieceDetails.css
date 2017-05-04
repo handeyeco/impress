@@ -1,11 +1,11 @@
 /** { border: 1px solid black; }*/
 
-.piece_container {
+.piece-container {
   max-width: 800px;
   margin: auto;
 }
 
-.piece_container > div {
+.piece-container > div {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -13,16 +13,16 @@
   padding-bottom: 20px;
 }
 
-.piece_image img {
+.piece-image img {
   max-width: 500px;
   max-height: 500px;
   object-fit: contain;
 }
 
-.piece_details {
+.piece-details {
   text-align: right;
 }
 
-.piece_description {
+.piece-description {
   text-align: justify;
 }

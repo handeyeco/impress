@@ -6,7 +6,7 @@ import './PageLayout.css';
 export const PageLayout = props => {
   return (
     <div>
-      <nav><Link className="page_title" to="/">Impressionism</Link></nav>
+      <nav><Link className="page-title" to="/">Impressionism</Link></nav>
       {props.children}
     </div>
   )
