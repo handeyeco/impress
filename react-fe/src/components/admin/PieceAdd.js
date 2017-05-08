@@ -3,13 +3,11 @@ import { Link } from 'react-router-dom';
 
 import { PieceDetailsForm } from './PieceDetailsForm.js';
 
-export const PieceEdit = props => {
-  let p = props.piece;
-
+export const PieceAdd = () => {
   return (
     <div>
-      <Link to={`/admin/art/${p.id}`}>Back</Link>
-      <PieceDetailsForm piece={p} />
+      <Link to="/admin">Back</Link>
+      <PieceDetailsForm />
     </div>
   )
 }

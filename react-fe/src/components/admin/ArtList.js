@@ -8,6 +8,7 @@ export const ArtList = props => {
 
   return (
     <div>
+      <Link to="/admin/art/add">Add</Link>
       {art}
     </div>
   )

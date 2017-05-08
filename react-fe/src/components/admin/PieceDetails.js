@@ -6,14 +6,13 @@ export const PieceDetails = props => {
 
   return (
     <div className="piece-container">
+      <Link to={`/admin`}>Back</Link>
       <Link to={`/admin/art/details/${p.id}`}>Edit</Link>
       <Link to={`/admin/art/image/${p.id}`}>Image</Link>
       <Link to={`/admin/art/delete/${p.id}`}>Delete</Link>
       <div>
         <div className="piece-image">
-          <Link to={"/zoom/" + p.id}>
-            <img src={p.small_image} alt={p.title + " by " + p.artist} />
-          </Link>
+          <img src={p.small_image} alt={p.title + " by " + p.artist} />
         </div>
         <div className="piece-full-details">
           <p><strong>Title:</strong> {p.title}</p>

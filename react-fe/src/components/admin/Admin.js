@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, Switch } from 'react-router-dom';
 
-import { ArtList } from './ArtList';
+import { ArtList }      from './ArtList';
+import { PieceAdd }     from './PieceAdd';
+import { PieceDelete }  from './PieceDelete';
 import { PieceDetails } from './PieceDetails';
-import { PieceEdit } from './PieceEdit';
-import { PieceDelete } from './PieceDelete';
+import { PieceEdit }    from './PieceEdit';
+import { PieceImage }   from './PieceImage';
 
 import { db } from '../../mock';
 
@@ -32,29 +34,35 @@ export class Admin extends Component {
         <div className="admin-sidebar">
           <Link className="page-title" to="/">Impressionism</Link>
           <ul>
-            <li><Link to="/admin">Home</Link></li>
-            <li><Link to="/admin/users">Users</Link></li>
+            <li><Link to="/admin">Dashboard</Link></li>
             <li>Logout</li>
           </ul>
         </div>
 
         <div className="admin-content">
-          <Route exact path="/admin" render={() => (
-              <ArtList art={this.state.art} />
-            )}
-          />
-          <Route exact path="/admin/art/:id" render={(props) => (
-              <PieceDetails piece={this.returnPieceByID(props.match.params.id)} />
-            )}
-          />
-          <Route exact path="/admin/art/details/:id" render={(props) => (
-              <PieceEdit piece={this.returnPieceByID(props.match.params.id)} />
-            )}
-          />
-          <Route exact path="/admin/art/delete/:id" render={(props) => (
-              <PieceDelete piece={this.returnPieceByID(props.match.params.id)} />
-            )}
-          />
+          <Switch>
+            <Route exact path="/admin" render={() => (
+                <ArtList art={this.state.art} />
+              )}
+            />
+            <Route exact path="/admin/art/add" component={PieceAdd} />
+            <Route exact path="/admin/art/details/:id" render={(props) => (
+                <PieceEdit piece={this.returnPieceByID(props.match.params.id)} />
+              )}
+            />
+            <Route exact path="/admin/art/image/:id" render={(props) => (
+                <PieceImage piece={this.returnPieceByID(props.match.params.id)} />
+              )}
+            />
+            <Route exact path="/admin/art/delete/:id" render={(props) => (
+                <PieceDelete piece={this.returnPieceByID(props.match.params.id)} />
+              )}
+            />
+            <Route exact path="/admin/art/:id" render={(props) => (
+                <PieceDetails piece={this.returnPieceByID(props.match.params.id)} />
+              )}
+            />
+          </Switch>
         </div>
       </div>
     )
