@@ -1,4 +1,6 @@
+from PIL import Image
 import re
+import os
 
 # Takes a string and makes sure it only contains:
 # letters, numbers, and special characters: $ # _ .
@@ -23,3 +25,25 @@ def valid_credentials(username, password):
     if not error:
         return (True, error)
     return (False, error)
+
+# Save image is going to take away some of the image processing from the route
+# Requires image, piece.id, and path to save the images to
+# Saves original image and image thumbnail
+# Returns filenames for saved files
+def save_image(image, id, path):
+    filetype = image.filename.split('.').pop()
+
+    # Save original ex. "4_original.jpg"
+    hr_filename = "{}_original.{}".format(id, filetype)
+    image.save(os.path.join(path, hr_filename))
+
+    # Convert image to PIL image and make thumbnail
+    image = Image.open(image)
+    image.thumbnail([1000, 1000])
+
+    # Save original ex. "4_1000.jpg"
+    small_filename = "{}_1000.{}".format(id, filetype)
+    image.save(os.path.join(path, small_filename))
+
+    # Return filename tuple
+    return hr_filename, small_filename

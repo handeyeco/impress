@@ -28,9 +28,19 @@ export class PieceDetailsForm extends Component {
   }
 
   handleFormSubmit(e) {
-    console.log(e.target);
-    let fd = new FormData(e.target);
     e.preventDefault();
+
+    let xhr = new XMLHttpRequest();
+    let formData = new FormData(e.target);
+    let action = e.target.getAttribute('action');
+    xhr.open('POST', action, true);
+    xhr.onreadystatechange = function () {
+      if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+        var response = JSON.parse(xhr.response);
+        console.log(response);
+      }
+    };
+    xhr.send(formData);
   }
 
   handleImageSelection(e) {
@@ -44,9 +54,6 @@ export class PieceDetailsForm extends Component {
           imagePreview: reader.result
         }
       });
-      let request = JSON.stringify(this.state.image.file);
-      console.log(this.state);
-      console.log(request);
     }
 
     reader.readAsDataURL(file);
@@ -63,14 +70,14 @@ export class PieceDetailsForm extends Component {
     let imageUploader = (
       <span>
         Image:
-        <input type="file" name="image" onChange={this.handleImageSelection} /><br />
+        <input type="file" name="image" accept="image/*" onChange={this.handleImageSelection} /><br />
       </span>
     );
 
     return (
       <div>
         {imagePreview}
-        <form onSubmit={this.handleFormSubmit}>
+        <form action="/api/pieces/add" encType="multipart/form-data" onSubmit={this.handleFormSubmit}>
           {this.state.piece.id ? "" : imageUploader}
           Title:
           <input type="text" value={this.state.piece.title} name="title" onChange={this.handleInputChange} required /><br />

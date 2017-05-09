@@ -1,46 +1,17 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from helpers import valid_credentials
+from helpers import valid_credentials, save_image
 from passlib.apps import custom_app_context as pwd_context
-from flask_jwt import JWT, jwt_required, current_identity
+import os
 
 # Create app
 app = Flask(__name__)
 app.config.from_object('config')
-# Connect database
+app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static/uploads')
+
+# Connect database and import models
 db = SQLAlchemy(app)
-
-##########
-# MODELS #
-##########
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), unique=True)
-    password = db.Column(db.String(120))
-
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
-
-    def __repr__(self):
-        return '<User {}>'.format(self.username)
-
-##################
-# AUTHENTICATION #
-##################
-def authenticate(username, password):
-    valid, error = valid_credentials(username, password)
-    if valid:
-        user = User.query.filter_by(username=username).first()
-        if user and pwd_context.verify(password, user.password):
-            return user
-    return None
-
-def identity(payload):
-    user_id = payload['identity']
-    return User.query.filter_by(id=user_id).first()
-
-jwt = JWT(app, authenticate, identity)
+from models import User, Piece
 
 ##########
 # ROUTES #
@@ -49,20 +20,43 @@ jwt = JWT(app, authenticate, identity)
 def hello():
     return 'Hello Universe!'
 
-@app.route('/admin')
-def admin():
-    return "Admin Dashboard"
+@app.route('/api/pieces/add', methods=['POST'])
+def pieces_add():
+    title           = request.form['title']
+    year_started    = request.form['year_started']
+    year_completed  = request.form['year_completed']
+    artist          = request.form['artist']
+    born            = request.form['born']
+    died            = request.form['died']
+    museum          = request.form['museum']
+    museum_link     = request.form['museum_link']
+    description     = request.form['description']
+
+    image = request.files['image']
+
+    piece = Piece(title, year_started, year_completed, artist, born, died, museum, museum_link, description)
+    db.session.add(piece)
+    db.session.commit()
+
+    piece.hr_image, piece.small_image = save_image(image, piece.id, app.config['UPLOAD_FOLDER'])
+
+    db.session.commit()
+
+    print(piece)
+    return jsonify({'id': piece.id})
 
 @app.route('/init')
 def init():
+    db.drop_all()
+    db.create_all()
     users = User.query.all()
     if len(users) == 0:
         password = pwd_context.hash('admin')
-        admin = User("admin", password)
+        admin = User('admin', password)
         db.session.add(admin)
         db.session.commit()
 
-    return redirect(url_for('admin'))
+    return redirect('/')
 
 if __name__ == '__main__':
     app.run()

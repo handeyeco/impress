@@ -2,6 +2,7 @@
   "name": "react-fe",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://127.0.0.1:5000",
   "dependencies": {
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
