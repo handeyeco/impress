@@ -43,12 +43,23 @@ def pieces_add():
     db.session.commit()
 
     print(piece)
-    return jsonify({'id': piece.id})
+    results = Piece.query.all()
+    results = [i.dict() for i in results]
+    return jsonify(results)
 
 @app.route('/init')
 def init():
+    # Reinitialize databases
     db.drop_all()
     db.create_all()
+
+    # Delete ALL files from upload directory
+    upload = app.config['UPLOAD_FOLDER']
+    file_list = [f for f in os.listdir(upload)]
+    for f in file_list:
+        os.remove(os.path.join(upload, f))
+
+    # Create new admin user
     users = User.query.all()
     if len(users) == 0:
         password = pwd_context.hash('admin')

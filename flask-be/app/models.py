@@ -1,4 +1,5 @@
 from app import db
+from flask import jsonify
 
 class Piece(db.Model):
     id              = db.Column(db.Integer, primary_key=True)
@@ -13,6 +14,23 @@ class Piece(db.Model):
     hr_image        = db.Column(db.String(120))
     small_image     = db.Column(db.String(120))
     description     = db.Column(db.Text)
+
+    def dict (self):
+        dictionary = {
+            'id'              : self.id or '',
+            'title'           : self.title or '',
+            'year_started'    : self.year_started or '',
+            'year_completed'  : self.year_completed or '',
+            'artist'          : self.artist or '',
+            'born'            : self.born or '',
+            'died'            : self.died or '',
+            'museum'          : self.museum or '',
+            'museum_link'     : self.museum_link or '',
+            'hr_image'        : self.hr_image or '',
+            'small_image'     : self.small_image or '',
+            'description'     : self.description or ''
+        }
+        return dictionary
 
     def __init__(self, title, year_started, year_completed, artist, born, died, museum, museum_link, description, hr_image=None, small_image=None):
         self.title           = title
