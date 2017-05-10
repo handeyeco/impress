@@ -1,13 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
+import { SlideContainer } from './SlideContainer';
 import { PieceDetailsForm } from './PieceDetailsForm.js';
 
 export const PieceAdd = props => {
+  const links = [{dest: "/admin", name: "Back"}];
+
   return (
-    <div>
-      <Link to="/admin">Back</Link>
+    <SlideContainer links={links}>
       <PieceDetailsForm handlePieceUpdate={props.handlePieceUpdate} />
-    </div>
+    </SlideContainer>
   )
 }

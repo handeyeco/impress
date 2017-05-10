@@ -1,10 +1,23 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
-export const PieceDelete = props => {
-  const p = props.piece;
+import { SlideContainer } from './SlideContainer';
 
-  function handleFormSubmit(e) {
+export class PieceDelete extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      piece: {...props.piece},
+      complete: false
+    };
+
+    this.handlePieceUpdate    = props.handlePieceUpdate;
+
+    this.handleFormSubmit     = this.handleFormSubmit.bind(this);
+  }
+
+  handleFormSubmit(e) {
     e.preventDefault();
 
     let xhr = new XMLHttpRequest();
@@ -14,19 +27,29 @@ export const PieceDelete = props => {
     xhr.onreadystatechange = () => {
       if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
         var response = JSON.parse(xhr.response);
-        props.handlePieceUpdate(response);
+        this.handlePieceUpdate(response);
+        this.setState({complete: true});
       }
     };
     xhr.send(formData);
   }
 
-  return (
-    <div>
-      <Link to={`/admin/art/${p.id}`}>Back</Link>
-      <form action={`/api/piece/delete/${p.id}`} onSubmit={handleFormSubmit}>
-        <input type="hidden" name="id" value={p.id} />
-        <input type="submit" value="Delete" />
-      </form>
-    </div>
-  )
+  render() {
+    const p = this.state.piece;
+    const links = [{dest: "/admin/art", name: "Back", appendID: true}];
+    const del = (
+      <SlideContainer links={links} piece={p}>
+        <form action={`/api/piece/delete/${p.id}`} onSubmit={this.handleFormSubmit}>
+          <input type="hidden" name="id" value={p.id} />
+          <input type="submit" value="Delete" />
+        </form>
+      </SlideContainer>
+    )
+
+    return (
+      <div>
+        {this.state.complete ? <Redirect to="/admin" /> : del}
+      </div>
+    )
+  }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 export class PieceDetailsForm extends Component {
   constructor(props) {
@@ -6,7 +7,8 @@ export class PieceDetailsForm extends Component {
 
     this.state = {
       piece: {...props.piece},
-      image: {}
+      image: {},
+      complete: false
     };
 
     this.handlePieceUpdate    = props.handlePieceUpdate;
@@ -40,6 +42,7 @@ export class PieceDetailsForm extends Component {
       if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
         var response = JSON.parse(xhr.response);
         this.handlePieceUpdate(response);
+        this.setState({complete: true})
       }
     };
     xhr.send(formData);
@@ -69,14 +72,14 @@ export class PieceDetailsForm extends Component {
       );
     }
 
-    let imageUploader = (
+    const imageUploader = (
       <span>
         Image:
         <input type="file" name="image" accept="image/*" onChange={this.handleImageSelection} /><br />
       </span>
     );
 
-    return (
+    const form = (
       <div>
         {imagePreview}
         <form action={this.state.piece.id ? `/api/piece/edit/${this.state.piece.id}` : "/api/pieces/add"} encType="multipart/form-data" onSubmit={this.handleFormSubmit}>
@@ -102,6 +105,12 @@ export class PieceDetailsForm extends Component {
           <input type="hidden" name="id" value={this.state.piece.id} />
           <input type="submit" value="Submit" />
         </form>
+      </div>
+    )
+
+    return (
+      <div>
+        {this.state.complete ? <Redirect to={this.state.piece.id ? `/admin/art/${this.state.piece.id}` : "/admin"} /> : form}
       </div>
     )
   }

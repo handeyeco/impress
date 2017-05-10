@@ -1,18 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import { SlideContainer } from './SlideContainer'
 
 export const PieceDetails = props => {
-  let p = props.piece;
+  const p = props.piece;
+  const links = [
+    {dest: "/admin", name: "Back"},
+    {dest: "/admin/art/edit", name: "Edit", appendID: true},
+    {dest: "/admin/art/image", name: "Image", appendID: true},
+    {dest: "/admin/art/delete", name: "Delete", appendID: true}
+  ]
 
   return (
-    <div className="piece-container">
-      <Link to={`/admin`}>Back</Link>
-      <Link to={`/admin/art/edit/${p.id}`}>Edit</Link>
-      <Link to={`/admin/art/image/${p.id}`}>Image</Link>
-      <Link to={`/admin/art/delete/${p.id}`}>Delete</Link>
+    <SlideContainer links={links} piece={p}>
       <div>
         <div className="piece-image">
-          <img src={'/mock/park_of_schonbrunn_1000.jpg' || p.small_image} alt={p.title + " by " + p.artist} />
+          <img src={p.small_image} alt={p.title + " by " + p.artist} />
         </div>
         <div className="piece-full-details">
           <p><strong>Title:</strong> {p.title}</p>
@@ -22,11 +25,11 @@ export const PieceDetails = props => {
           <p><strong>Born:</strong> {p.born}</p>
           <p><strong>Died:</strong> {p.died}</p>
           <p><strong>Museum:</strong> {p.museum}</p>
-          <p><strong>Museum Link:</strong> {p.museum_link}</p>
+          <p><strong>Museum Link:</strong> <a href={`http://${p.museum_link}`}>{p.museum_link}</a></p>
         </div>
       </div>
       <p><strong>Description:</strong></p>
       <p className="piece-description">{p.description}</p>
-    </div>
+    </SlideContainer>
   )
 }

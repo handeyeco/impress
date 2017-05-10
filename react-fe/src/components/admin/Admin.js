@@ -59,7 +59,7 @@ export class Admin extends Component {
                 <ArtList art={this.state.pieces} />
               )}
             />
-          <Route exact path="/admin/art/add" render={() => (
+            <Route exact path="/admin/art/add" render={() => (
                 <PieceAdd handlePieceUpdate={this.handlePieceUpdate} />
               )}
             />
@@ -68,7 +68,7 @@ export class Admin extends Component {
               )}
             />
             <Route exact path="/admin/art/image/:id" render={(props) => (
-                <PieceImage piece={this.returnPieceByID(props.match.params.id)} />
+                <PieceImage piece={this.returnPieceByID(props.match.params.id)} handlePieceUpdate={this.handlePieceUpdate} />
               )}
             />
             <Route exact path="/admin/art/delete/:id" render={(props) => (
