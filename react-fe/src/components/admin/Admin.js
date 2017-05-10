@@ -8,14 +8,28 @@ import { PieceDetails } from './PieceDetails';
 import { PieceEdit }    from './PieceEdit';
 import { PieceImage }   from './PieceImage';
 
-import { db } from '../../mock';
-
 import './Admin.css';
 
 export class Admin extends Component {
   constructor(props) {
     super(props);
-    this.state = { art: db };
+    this.state = { pieces: [] };
+
+    this.handlePieceUpdate = this.handlePieceUpdate.bind(this);
+  }
+
+  // Initial API call
+  // Grabs all pieces as an array of objects
+  // Updates state when receiving JSON
+  componentDidMount() {
+    fetch('/api/pieces')
+    .then(response => response.json())
+    .then(this.handlePieceUpdate);
+  }
+
+  handlePieceUpdate(pieces) {
+    this.setState({ pieces });
+    console.log(this.state);
   }
 
   // Helper function to grab piece of art from array of pieces
@@ -23,7 +37,7 @@ export class Admin extends Component {
   // returns piece object if there's a match or undefined
   returnPieceByID(id) {
     id = +id;
-    return this.state.art.find(elem => {
+    return this.state.pieces.find(elem => {
       return elem.id === id;
     })
   }
@@ -42,12 +56,15 @@ export class Admin extends Component {
         <div className="admin-content">
           <Switch>
             <Route exact path="/admin" render={() => (
-                <ArtList art={this.state.art} />
+                <ArtList art={this.state.pieces} />
               )}
             />
-            <Route exact path="/admin/art/add" component={PieceAdd} />
-            <Route exact path="/admin/art/details/:id" render={(props) => (
-                <PieceEdit piece={this.returnPieceByID(props.match.params.id)} />
+          <Route exact path="/admin/art/add" render={() => (
+                <PieceAdd handlePieceUpdate={this.handlePieceUpdate} />
+              )}
+            />
+            <Route exact path="/admin/art/edit/:id" render={(props) => (
+                <PieceEdit piece={this.returnPieceByID(props.match.params.id)} handlePieceUpdate={this.handlePieceUpdate} />
               )}
             />
             <Route exact path="/admin/art/image/:id" render={(props) => (
@@ -55,7 +72,7 @@ export class Admin extends Component {
               )}
             />
             <Route exact path="/admin/art/delete/:id" render={(props) => (
-                <PieceDelete piece={this.returnPieceByID(props.match.params.id)} />
+                <PieceDelete piece={this.returnPieceByID(props.match.params.id)} handlePieceUpdate={this.handlePieceUpdate} />
               )}
             />
             <Route exact path="/admin/art/:id" render={(props) => (

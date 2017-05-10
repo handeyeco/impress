@@ -9,7 +9,7 @@ export const PieceEdit = props => {
   return (
     <div>
       <Link to={`/admin/art/${p.id}`}>Back</Link>
-      <PieceDetailsForm piece={p} />
+      <PieceDetailsForm piece={p} handlePieceUpdate={props.handlePieceUpdate} />
     </div>
   )
 }

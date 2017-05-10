@@ -9,6 +9,8 @@ export class PieceDetailsForm extends Component {
       image: {}
     };
 
+    this.handlePieceUpdate    = props.handlePieceUpdate;
+
     this.handleInputChange    = this.handleInputChange.bind(this);
     this.handleImageSelection = this.handleImageSelection.bind(this);
     this.handleFormSubmit     = this.handleFormSubmit.bind(this);
@@ -34,10 +36,10 @@ export class PieceDetailsForm extends Component {
     let formData = new FormData(e.target);
     let action = e.target.getAttribute('action');
     xhr.open('POST', action, true);
-    xhr.onreadystatechange = function () {
+    xhr.onreadystatechange = () => {
       if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
         var response = JSON.parse(xhr.response);
-        console.log(response);
+        this.handlePieceUpdate(response);
       }
     };
     xhr.send(formData);
@@ -77,7 +79,7 @@ export class PieceDetailsForm extends Component {
     return (
       <div>
         {imagePreview}
-        <form action="/api/pieces/add" encType="multipart/form-data" onSubmit={this.handleFormSubmit}>
+        <form action={this.state.piece.id ? `/api/piece/edit/${this.state.piece.id}` : "/api/pieces/add"} encType="multipart/form-data" onSubmit={this.handleFormSubmit}>
           {this.state.piece.id ? "" : imageUploader}
           Title:
           <input type="text" value={this.state.piece.title} name="title" onChange={this.handleInputChange} required /><br />

@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 
 import { PieceDetailsForm } from './PieceDetailsForm.js';
 
-export const PieceAdd = () => {
+export const PieceAdd = props => {
   return (
     <div>
       <Link to="/admin">Back</Link>
-      <PieceDetailsForm />
+      <PieceDetailsForm handlePieceUpdate={props.handlePieceUpdate} />
     </div>
   )
 }
