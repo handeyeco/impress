@@ -14,10 +14,10 @@ export const PieceDetails = props => {
   return (
     <SlideContainer links={links} piece={p}>
       <div>
-        <div className="piece-image">
-          <img src={p.small_image} alt={p.title + " by " + p.artist} />
+        <div>
+          <img src={p.image_500} alt={p.title + " by " + p.artist} />
         </div>
-        <div className="piece-full-details">
+        <div>
           <p><strong>Title:</strong> {p.title}</p>
           <p><strong>Year Started:</strong> {p.year_started}</p>
           <p><strong>Year Completed:</strong> {p.year_completed}</p>
@@ -29,7 +29,7 @@ export const PieceDetails = props => {
         </div>
       </div>
       <p><strong>Description:</strong></p>
-      <p className="piece-description">{p.description}</p>
+      <p>{p.description}</p>
     </SlideContainer>
   )
 }

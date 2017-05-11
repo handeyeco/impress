@@ -11,8 +11,10 @@ class Piece(db.Model):
     died            = db.Column(db.String(10))
     museum          = db.Column(db.String(120))
     museum_link     = db.Column(db.String(120))
-    hr_image        = db.Column(db.String(120))
-    small_image     = db.Column(db.String(120))
+    image_hr        = db.Column(db.String(120))
+    image_1000      = db.Column(db.String(120))
+    image_500       = db.Column(db.String(120))
+    image_100       = db.Column(db.String(120))
     description     = db.Column(db.Text)
 
     def dict (self):
@@ -26,13 +28,15 @@ class Piece(db.Model):
             'died'            : self.died or '',
             'museum'          : self.museum or '',
             'museum_link'     : self.museum_link or '',
-            'hr_image'        : self.hr_image or '',
-            'small_image'     : self.small_image or '',
+            'image_hr'        : self.image_hr or '',
+            'image_1000'      : self.image_1000 or '',
+            'image_500'       : self.image_500 or '',
+            'image_100'       : self.image_100 or '',
             'description'     : self.description or ''
         }
         return dictionary
 
-    def __init__(self, title, year_started, year_completed, artist, born, died, museum, museum_link, description, hr_image=None, small_image=None):
+    def __init__(self, title, year_started, year_completed, artist, born, died, museum, museum_link, description, image_hr=None, image_1000=None, image_500=None, image_100=None):
         self.title           = title
         self.year_started    = year_started
         self.year_completed  = year_completed
@@ -42,8 +46,10 @@ class Piece(db.Model):
         self.museum          = museum
         self.museum_link     = museum_link
         self.description     = description
-        self.hr_image        = hr_image
-        self.small_image     = small_image
+        self.image_hr        = image_hr
+        self.image_1000      = image_1000
+        self.image_500       = image_500
+        self.image_100       = image_100
 
     def __repr__(self):
         return '<Piece {} {} by {}>'.format(self.id, self.title, self.artist)

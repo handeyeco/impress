@@ -59,7 +59,7 @@ export class PieceImage extends Component {
     const uploader = (
       <SlideContainer links={links} piece={p}>
         <div className="piece-image">
-          <img src={i.imagePreview || p.small_image} alt={p.title + " by " + p.artist} />
+          <img src={i.imagePreview || p.image_500} alt={p.title + " by " + p.artist} />
         </div>
         <form action={`/api/piece/image/${p.id}`} encType="multipart/form-data" onSubmit={this.handleFormSubmit}>
           <input type="file" name="image" accept="image/*" onChange={this.handleImageSelection} /><br />

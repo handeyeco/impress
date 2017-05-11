@@ -10,7 +10,7 @@ export const PieceDetails = props => {
       <div>
         <div className="piece-image">
           <Link to={"/zoom/" + p.id}>
-            <img src={p.small_image} alt={p.title + " by " + p.artist} />
+            <img src={p.image_500} alt={p.title + " by " + p.artist} />
           </Link>
         </div>
         <div className="piece-details">

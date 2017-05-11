@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from helpers import valid_credentials, save_image
+from helpers import valid_credentials, save_image, query_jsonify
 from passlib.apps import custom_app_context as pwd_context
 import os
 
@@ -22,25 +22,27 @@ def hello():
 
 @app.route('/api/piece/delete/<id>', methods=['POST'])
 def piece_delete(id):
+    # Grab the piece by id and delete it
     piece = Piece.query.get(id)
     db.session.delete(piece)
     db.session.commit()
 
+    # Remove image files from upload folder
     upload = app.config['UPLOAD_FOLDER']
     file_list = [f for f in os.listdir(upload)]
     for f in file_list:
         if id == f.split('_')[0]:
             os.remove(os.path.join(upload, f))
 
-    pieces = Piece.query.all()
-    pieces = [i.dict() for i in pieces]
-    return jsonify(pieces)
+    # Return list of remaining pieces
+    return query_jsonify(Piece.query.all())
 
 @app.route('/api/piece/edit/<id>', methods=['POST'])
 def piece_edit(id):
+    # Grab the piece by id
     p = Piece.query.get(id)
 
-    # Grab params from request
+    # Grab params from request and update piece
     p.title           = request.form['title']
     p.year_started    = request.form['year_started']
     p.year_completed  = request.form['year_completed']
@@ -51,14 +53,13 @@ def piece_edit(id):
     p.museum_link     = request.form['museum_link']
     p.description     = request.form['description']
 
+    # Save piece and return current list of pieces
     db.session.commit()
-
-    pieces = Piece.query.all()
-    pieces = [i.dict() for i in pieces]
-    return jsonify(pieces)
+    return query_jsonify(Piece.query.all())
 
 @app.route('/api/piece/image/<id>', methods=['POST'])
 def piece_image(id):
+    # Grab piece by id and new image from request
     piece = Piece.query.get(id)
     image = request.files['image']
 
@@ -72,22 +73,17 @@ def piece_image(id):
     # Save the new image and a new thumbnail image
     hr_image, small_image = save_image(image, piece.id, upload)
     piece.hr_image, piece.small_image = url_for('static', filename='uploads/{}'.format(hr_image)), url_for('static', filename='uploads/{}'.format(small_image))
-    #
+
     # Once we have the filenames for the images, save them to the db
     db.session.commit()
 
-    # Grab a list of all the pieces
-    # Create a list of dicts of the piece information
-    # And return that list as a JSON object
-    pieces = Piece.query.all()
-    pieces = [i.dict() for i in pieces]
-    return jsonify(pieces)
+    # Return list of current pieces
+    return query_jsonify(Piece.query.all())
 
 @app.route('/api/pieces')
 def pieces():
-    pieces = Piece.query.all()
-    pieces = [i.dict() for i in pieces]
-    return jsonify(pieces)
+    # Return list of current pieces
+    return query_jsonify(Piece.query.all())
 
 @app.route('/api/pieces/add', methods=['POST'])
 def pieces_add():
@@ -109,18 +105,13 @@ def pieces_add():
     db.session.commit()
 
     # Once we have the Piece ID, save the image and a thumbnail image
-    hr_image, small_image = save_image(image, piece.id, app.config['UPLOAD_FOLDER'])
-    piece.hr_image, piece.small_image = url_for('static', filename='uploads/{}'.format(hr_image)), url_for('static', filename='uploads/{}'.format(small_image))
+    piece.image_hr, piece.image_1000, piece.image_500, piece.image_100 = save_image(image, piece.id, app.config['UPLOAD_FOLDER'])
 
     # Once we have the filenames for the images, save them to the db
     db.session.commit()
 
-    # Grab a list of all the pieces
-    # Create a list of dicts of the piece information
-    # And return that list as a JSON object
-    pieces = Piece.query.all()
-    pieces = [i.dict() for i in pieces]
-    return jsonify(pieces)
+    # Return list of current pieces
+    return query_jsonify(Piece.query.all())
 
 @app.route('/init')
 def init():

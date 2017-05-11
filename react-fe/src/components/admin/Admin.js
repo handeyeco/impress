@@ -8,12 +8,14 @@ import { PieceDetails } from './PieceDetails';
 import { PieceEdit }    from './PieceEdit';
 import { PieceImage }   from './PieceImage';
 
+import { db } from '../../mock';
+
 import './Admin.css';
 
 export class Admin extends Component {
   constructor(props) {
     super(props);
-    this.state = { pieces: [] };
+    this.state = { pieces: db };
 
     this.handlePieceUpdate = this.handlePieceUpdate.bind(this);
   }
@@ -24,7 +26,7 @@ export class Admin extends Component {
   componentDidMount() {
     fetch('/api/pieces')
     .then(response => response.json())
-    .then(this.handlePieceUpdate);
+    // .then(this.handlePieceUpdate);
   }
 
   handlePieceUpdate(pieces) {
@@ -47,10 +49,10 @@ export class Admin extends Component {
       <div className="admin-container">
         <div className="admin-sidebar">
           <Link className="page-title" to="/">Impressionism</Link>
-          <ul>
-            <li><Link to="/admin">Dashboard</Link></li>
-            <li>Logout</li>
-          </ul>
+          <nav>
+            <Link to="/admin">Dashboard</Link>
+            <Link to="/admin/logout">Logout</Link>
+          </nav>
         </div>
 
         <div className="admin-content">
