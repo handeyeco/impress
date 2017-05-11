@@ -1,19 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
+import { ArtListThumbnail } from './ArtListThumbnail';
 import { SlideContainer } from './SlideContainer';
+
+import './ArtList.css';
 
 export const ArtList = props => {
   const art = [...props.art].map(p => (
-    <li key={p.id}>
-      <Link to={`/admin/art/${p.id}`}>{p.year_completed}: {p.title} by {p.artist}</Link>
-    </li>
+    <ArtListThumbnail piece={p} key={p.id} />
   ));
   const links = [{dest: "/admin/art/add", name: "Add"}];
 
   return (
     <SlideContainer links={links}>
-      {art}
+      <div className="a-artlist-container">
+        {art}
+      </div>
     </SlideContainer>
   )
 }

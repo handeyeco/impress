@@ -1,4 +1,17 @@
+/** { border: 1px solid black; }*/
+
 body {
+  --dark-color: #C0B283;
+  --light-color: #DCD0C0;
+  --white: #F4F4F4;
+  --black: #373737;
   margin: 0;
   padding: 0;
+  font-family: sans-serif;
+  color: var(--black);
+}
+
+a {
+  text-decoration: none;
+  color: var(--black);
 }

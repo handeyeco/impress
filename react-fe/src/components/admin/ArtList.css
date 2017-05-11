@@ -1,0 +1,7 @@
+.a-artlist-container {
+  padding-bottom: 1em;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}

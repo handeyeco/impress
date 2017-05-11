@@ -2,6 +2,8 @@ import React from 'react';
 
 import { SlideContainer } from './SlideContainer'
 
+import './PieceDetails.css';
+
 export const PieceDetails = props => {
   const p = props.piece;
   const links = [
@@ -9,27 +11,58 @@ export const PieceDetails = props => {
     {dest: "/admin/art/edit", name: "Edit", appendID: true},
     {dest: "/admin/art/image", name: "Image", appendID: true},
     {dest: "/admin/art/delete", name: "Delete", appendID: true}
-  ]
+  ];
+  const imageStyle = {
+    backgroundImage: `url(${p.image_500})`
+  }
 
   return (
     <SlideContainer links={links} piece={p}>
-      <div>
-        <div>
-          <img src={p.image_500} alt={p.title + " by " + p.artist} />
+      <div className="a-piecedetails-container">
+        <div className="a-piecedetails-inner-container">
+          <div className="a-piecedetails-image">
+            <img src={p.image_500} alt={p.title} />
+          </div>
+          <table className="a-piecedetails-table">
+            <tbody>
+              <tr>
+                <th>Title:</th>
+                <td>{p.title}</td>
+              </tr>
+              <tr>
+                <th>Started:</th>
+                <td>{p.year_started}</td>
+              </tr>
+              <tr>
+                <th>Completed:</th>
+                <td>{p.year_completed}</td>
+              </tr>
+              <tr>
+                <th>Artist:</th>
+                <td>{p.artist}</td>
+              </tr>
+              <tr>
+                <th>Born:</th>
+                <td>{p.born}</td>
+              </tr>
+              <tr>
+                <th>Died:</th>
+                <td>{p.died}</td>
+              </tr>
+              <tr>
+                <th>Museum:</th>
+                <td>{p.museum}</td>
+              </tr>
+              <tr>
+                <th>Link:</th>
+                <td><a href={`http://${p.museum_link}`}>{p.museum_link}</a></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div>
-          <p><strong>Title:</strong> {p.title}</p>
-          <p><strong>Year Started:</strong> {p.year_started}</p>
-          <p><strong>Year Completed:</strong> {p.year_completed}</p>
-          <p><strong>Artist:</strong> {p.artist}</p>
-          <p><strong>Born:</strong> {p.born}</p>
-          <p><strong>Died:</strong> {p.died}</p>
-          <p><strong>Museum:</strong> {p.museum}</p>
-          <p><strong>Museum Link:</strong> <a href={`http://${p.museum_link}`}>{p.museum_link}</a></p>
-        </div>
+        <p><strong>Description:</strong></p>
+        <p className="a-piecedetails-description">{p.description}</p>
       </div>
-      <p><strong>Description:</strong></p>
-      <p>{p.description}</p>
     </SlideContainer>
   )
 }

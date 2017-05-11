@@ -1,0 +1,23 @@
+.a-slidecontainer {
+  display: grid;
+  grid-template-rows: 3em calc(100vh - 3em);
+}
+
+.a-slidecontainer-content {
+  overflow: scroll;
+  background: var(--white);
+}
+
+.a-slidecontainer-nav {
+  background: var(--light-color);
+  display: flex;
+  align-items: center;
+}
+
+.a-slidecontainer-nav a {
+  padding: 1em 1.5em;
+}
+
+.a-slidecontainer-nav a:hover {
+  background: var(--white);
+}

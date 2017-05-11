@@ -48,14 +48,16 @@ export class Admin extends Component {
     return (
       <div className="admin-container">
         <div className="admin-sidebar">
-          <Link className="page-title" to="/">Impressionism</Link>
-          <nav>
+          <div className="admin-sidebar-title">
+            <Link to="/">Impressionism</Link>
+          </div>
+          <nav className="admin-sidebar-nav">
             <Link to="/admin">Dashboard</Link>
             <Link to="/admin/logout">Logout</Link>
           </nav>
         </div>
 
-        <div className="admin-content">
+        <div className="admin-content-container">
           <Switch>
             <Route exact path="/admin" render={() => (
                 <ArtList art={this.state.pieces} />
