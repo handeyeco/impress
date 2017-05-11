@@ -12,13 +12,10 @@ export const PieceDetails = props => {
     {dest: "/admin/art/image", name: "Image", appendID: true},
     {dest: "/admin/art/delete", name: "Delete", appendID: true}
   ];
-  const imageStyle = {
-    backgroundImage: `url(${p.image_500})`
-  }
 
   return (
     <SlideContainer links={links} piece={p}>
-      <div className="a-piecedetails-container">
+      <div className="admin-middle-container">
         <div className="a-piecedetails-inner-container">
           <div className="a-piecedetails-image">
             <img src={p.image_500} alt={p.title} />

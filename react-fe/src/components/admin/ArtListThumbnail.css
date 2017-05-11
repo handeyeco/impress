@@ -7,6 +7,7 @@
   margin: 1em 0 0;
   width: 20em;
   height: 20em;
+  transition: opacity 1s;
 }
 
 .a-artlistthumbnail-container:hover {
@@ -14,7 +15,11 @@
 }
 
 .a-artlistthumbnail-container p {
-  width: 100%;
+  width: 70%;
+  margin: 2em 0;
   padding: 1em;
+  border-top: 3px solid var(--black);
+  border-left: 3px solid var(--black);
+  border-bottom: 3px solid var(--black);
   background: var(--white);
 }

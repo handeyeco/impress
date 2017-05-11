@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
+import './PieceDetailsForm.css';
+
 export class PieceDetailsForm extends Component {
   constructor(props) {
     super(props);
@@ -74,34 +76,51 @@ export class PieceDetailsForm extends Component {
 
     const imageUploader = (
       <span>
-        Image:
-        <input type="file" name="image" accept="image/*" onChange={this.handleImageSelection} /><br />
+        <label htmlFor="image" className="a-piecedetailsform-imagelabel"><svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M896 672q119 0 203.5 84.5t84.5 203.5-84.5 203.5-203.5 84.5-203.5-84.5-84.5-203.5 84.5-203.5 203.5-84.5zm704-416q106 0 181 75t75 181v896q0 106-75 181t-181 75h-1408q-106 0-181-75t-75-181v-896q0-106 75-181t181-75h224l51-136q19-49 69.5-84.5t103.5-35.5h512q53 0 103.5 35.5t69.5 84.5l51 136h224zm-704 1152q185 0 316.5-131.5t131.5-316.5-131.5-316.5-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5z"/></svg></label>
+        <input type="file" name="image" id="image" accept="image/*" onChange={this.handleImageSelection} /><br />
       </span>
     );
 
     const form = (
       <div>
-        {imagePreview}
-        <form action={this.state.piece.id ? `/api/piece/edit/${this.state.piece.id}` : "/api/pieces/add"} encType="multipart/form-data" onSubmit={this.handleFormSubmit}>
-          {this.state.piece.id ? "" : imageUploader}
-          Title:
-          <input type="text" value={this.state.piece.title} name="title" onChange={this.handleInputChange} required /><br />
-          Year Started:
-          <input type="text" value={this.state.piece.year_started} name="year_started" onChange={this.handleInputChange} required /><br />
-          Year Completed:
-          <input type="text" value={this.state.piece.year_completed} name="year_completed" onChange={this.handleInputChange} required /><br />
-          Artist:
-          <input type="text" value={this.state.piece.artist} name="artist" onChange={this.handleInputChange} required /><br />
-          Born:
-          <input type="text" value={this.state.piece.born} name="born" onChange={this.handleInputChange} required /><br />
-          Died:
-          <input type="text" value={this.state.piece.died} name="died" onChange={this.handleInputChange} required /><br />
-          Museum:
-          <input type="text" value={this.state.piece.museum} name="museum" onChange={this.handleInputChange} required /><br />
-          Museum Link:
-          <input type="text" value={this.state.piece.museum_link} name="museum_link" onChange={this.handleInputChange} required /><br />
-          Description:
+        <form action={this.state.piece.id ? `/api/piece/edit/${this.state.piece.id}` : "/api/pieces/add"} encType="multipart/form-data" onSubmit={this.handleFormSubmit} className="a-piecedetailsform-form">
+          <div className="a-piecedetailsform-imagebox">
+            {imagePreview}
+            {this.state.piece.id ? "" : imageUploader}
+          </div>
+
+          <div className="a-piecedetailsform-formflex">
+            <div>
+              <label htmlFor="title">Title:</label>
+              <input type="text" value={this.state.piece.title} name="title" id="title" onChange={this.handleInputChange} required /><br />
+
+              <label htmlFor="year_started">Year Started:</label>
+              <input type="text" value={this.state.piece.year_started} name="year_started" id="year_started" onChange={this.handleInputChange} required /><br />
+
+              <label htmlFor="year_completed">Year Completed:</label>
+              <input type="text" value={this.state.piece.year_completed} name="year_completed" id="year_completed" onChange={this.handleInputChange} required /><br />
+
+              <label htmlFor="museum">Museum:</label>
+              <input type="text" value={this.state.piece.museum} name="museum" id="museum" onChange={this.handleInputChange} required /><br />
+            </div>
+            <div>
+              <label htmlFor="artist">Artist:</label>
+              <input type="text" value={this.state.piece.artist} name="artist" id="artist" onChange={this.handleInputChange} required /><br />
+
+              <label htmlFor="born">Born:</label>
+              <input type="text" value={this.state.piece.born} name="born" id="born" onChange={this.handleInputChange} required /><br />
+
+              <label htmlFor="died">Died:</label>
+              <input type="text" value={this.state.piece.died} name="died" id="died" onChange={this.handleInputChange} required /><br />
+
+              <label htmlFor="museum_link">Museum Link:</label>
+              <input type="text" value={this.state.piece.museum_link} name="museum_link" id="museum_link" onChange={this.handleInputChange} required /><br />
+            </div>
+          </div>
+
+          <label htmlFor="description">Description:</label>
           <textarea value={this.state.piece.description} name="description" onChange={this.handleInputChange} required /><br />
+
           <input type="hidden" name="id" value={this.state.piece.id} />
           <input type="submit" value="Submit" />
         </form>

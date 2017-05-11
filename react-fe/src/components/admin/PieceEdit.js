@@ -9,7 +9,9 @@ export const PieceEdit = props => {
 
   return (
     <SlideContainer links={links} piece={p}>
-      <PieceDetailsForm piece={p} handlePieceUpdate={props.handlePieceUpdate} />
+      <div className="admin-middle-container">
+        <PieceDetailsForm piece={p} handlePieceUpdate={props.handlePieceUpdate} />
+      </div>
     </SlideContainer>
   )
 }

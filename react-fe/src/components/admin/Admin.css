@@ -1,3 +1,8 @@
+.admin-middle-container {
+  width: 80%;
+  margin: 2em auto 5em;
+}
+
 .admin-container {
   height: 100vh;
   display: grid;

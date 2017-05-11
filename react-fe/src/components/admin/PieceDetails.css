@@ -10,11 +10,6 @@
   padding: 0.25em 2em;
 }
 
-.a-piecedetails-container {
-  width: 80%;
-  margin: 2em auto 5em;
-}
-
 .a-piecedetails-inner-container {
   display: flex;
   align-items: center;
