@@ -83,7 +83,7 @@ export class PieceDetailsForm extends Component {
 
     const form = (
       <div>
-        <form action={this.state.piece.id ? `/api/piece/edit/${this.state.piece.id}` : "/api/pieces/add"} encType="multipart/form-data" onSubmit={this.handleFormSubmit} className="a-piecedetailsform-form">
+        <form action={this.state.piece.id ? `/api/piece/edit/${this.state.piece.id}` : "/api/pieces/add"} encType="multipart/form-data" onSubmit={this.handleFormSubmit} className="a-piecedetailsform-form controlled-form">
           <div className="a-piecedetailsform-imagebox">
             {imagePreview}
             {this.state.piece.id ? "" : imageUploader}
@@ -122,7 +122,7 @@ export class PieceDetailsForm extends Component {
           <textarea value={this.state.piece.description} name="description" onChange={this.handleInputChange} required /><br />
 
           <input type="hidden" name="id" value={this.state.piece.id} />
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Save" />
         </form>
       </div>
     )

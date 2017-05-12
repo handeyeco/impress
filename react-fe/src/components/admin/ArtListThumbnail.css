@@ -18,8 +18,8 @@
   width: 70%;
   margin: 2em 0;
   padding: 1em;
-  border-top: 3px solid var(--black);
-  border-left: 3px solid var(--black);
-  border-bottom: 3px solid var(--black);
+  border-top: 3px solid var(--dark-color);
+  border-left: 3px solid var(--dark-color);
+  border-bottom: 3px solid var(--dark-color);
   background: var(--white);
 }

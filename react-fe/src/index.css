@@ -3,7 +3,7 @@
 body {
   --dark-color: #C0B283;
   --light-color: #DCD0C0;
-  --white: #F4F4F4;
+  --white: white;
   --black: #373737;
   margin: 0;
   padding: 0;

@@ -3,6 +3,8 @@ import { Redirect } from 'react-router-dom';
 
 import { SlideContainer } from './SlideContainer';
 
+import './PieceDelete.css';
+
 export class PieceDelete extends Component {
   constructor(props) {
     super(props);
@@ -39,10 +41,14 @@ export class PieceDelete extends Component {
     const links = [{dest: "/admin/art", name: "Back", appendID: true}];
     const del = (
       <SlideContainer links={links} piece={p}>
-        <form action={`/api/piece/delete/${p.id}`} onSubmit={this.handleFormSubmit}>
-          <input type="hidden" name="id" value={p.id} />
-          <input type="submit" value="Delete" />
-        </form>
+        <div className="a-piecedelete-container">
+          <form action={`/api/piece/delete/${p.id}`} onSubmit={this.handleFormSubmit} className="a-piecedelete-form">
+            <input type="hidden" name="id" value={p.id} />
+            <p><em>{p.title} by {p.artist}</em></p>
+            <p><strong>Are you sure you want to delete this piece?</strong></p>
+            <input type="submit" id="delete" value="Delete" />
+          </form>
+        </div>
       </SlideContainer>
     )
 

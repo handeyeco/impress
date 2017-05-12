@@ -9,15 +9,19 @@
 }
 
 .a-slidecontainer-nav {
-  background: var(--light-color);
+  background-color: var(--white);
+  border-bottom: 1px solid var(--dark-color);
   display: flex;
-  align-items: center;
 }
 
 .a-slidecontainer-nav a {
-  padding: 1em 1.5em;
+  color: var(--dark-color);
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 1.5em;
 }
 
 .a-slidecontainer-nav a:hover {
-  background: var(--white);
+  background: white;
 }

@@ -1,0 +1,57 @@
+.controlled-form label {
+  color: var(--dark-color);
+  font-size: 0.75em;
+}
+
+.controlled-form input {
+  color: var(--black);
+}
+
+.controlled-form input[type=text] {
+  display: block;
+  width: 100%;
+  font-size: 1em;
+  background: none;
+  border: none;
+  transition: all 0.2s;
+  margin-top: 0.75em;
+  margin-bottom: 2px;
+  border-bottom: 1px solid var(--light-color);
+}
+
+.controlled-form input[type=text]:focus {
+  outline: none;
+  /*margin-bottom: 0px;*/
+  border-bottom: 3px solid var(--dark-color);
+}
+
+.controlled-form input[type=submit] {
+  outline: none;
+  color: var(--white);
+  background: var(--dark-color);
+  font-size: 1em;
+  border: none;
+  padding: 1em 1.5em;
+  transition: all 1s;
+}
+
+.controlled-form input[type=submit]:hover {
+  cursor: pointer;
+  background: var(--light-color);
+}
+
+.controlled-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  height: 20em;
+  font-size: 1em;
+  border: none;
+  padding: 1em;
+  margin-top: 0.75em;
+  border: 1px solid var(--light-color);
+}
+
+.controlled-form textarea:focus {
+  outline: none;
+  border: 3px solid var(--dark-color);
+}

@@ -1,19 +1,37 @@
 .a-piecedetails-image img {
-  max-width: 30em;
-  max-height: 30em;
+  max-width: 25em;
+  max-height: 25em;
   width: auto;
   height: auto;
 }
 
 .a-piecedetails-table th {
   text-align: right;
-  padding: 0.25em 2em;
+  padding: 1em 2em;
+  color: var(--dark-color);
+  font-size: 0.75em;
+}
+
+.a-piecedetails-table tr {
+  border-bottom: 1px solid var(--dark-color);
 }
 
 .a-piecedetails-inner-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+}
+
+.a-piecedetails-goldrow {
+  border: 0;
+  border-top: 1px solid var(--dark-color);
+  margin: 2em 0;
+}
+
+.a-piecedetails-title {
+  color: var(--dark-color);
+  font-size: 0.75em;
+  font-weight: bold;
 }
 
 .a-piecedetails-description {

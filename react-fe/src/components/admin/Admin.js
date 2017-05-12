@@ -11,6 +11,7 @@ import { PieceImage }   from './PieceImage';
 import { db } from '../../mock';
 
 import './Admin.css';
+import './ControlledForm.css';
 
 export class Admin extends Component {
   constructor(props) {

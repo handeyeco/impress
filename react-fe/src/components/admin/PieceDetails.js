@@ -57,7 +57,8 @@ export const PieceDetails = props => {
             </tbody>
           </table>
         </div>
-        <p><strong>Description:</strong></p>
+        <hr className="a-piecedetails-goldrow" />
+        <p className="a-piecedetails-title">Description:</p>
         <p className="a-piecedetails-description">{p.description}</p>
       </div>
     </SlideContainer>
