@@ -1,0 +1,28 @@
+.p-thumbnail-container {
+  padding-right: 3em;
+}
+
+.p-thumbnail-details {
+  list-style: none;
+  margin: 0;
+  padding: 0 1em;
+  font-size: 0.75em;
+}
+
+.p-thumbnail-details li {
+  margin: 0.25em 0;
+}
+
+.p-thumbnail-golden {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: var(--dark-color);
+}
+
+.p-thumbnail-img {
+  max-width: 30em;
+  max-height: 30em;
+  width: auto;
+  height: auto;
+  border: 5px solid var(--dark-color);
+}

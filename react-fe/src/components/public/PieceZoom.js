@@ -6,6 +6,8 @@ import './PieceZoom.css';
 export const PieceZoom = props => {
   let p = props.piece;
   return (
-    <Link to={'/details/' + p.id}><img className="piece_zoom" src={p.image_hr} alt={p.title + " by " + p.artist} /></Link>
+    <div className="p-piecezoom-container">
+      <img className="p-piecezoon-img" src={p.image_hr} alt={p.title + " by " + p.artist} />
+    </div>
   )
 }

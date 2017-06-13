@@ -1,0 +1,23 @@
+.p-pagelayout-nav {
+  background: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+  padding: 1em;
+  z-index: 2000;
+}
+
+.p-pagelayout-title {
+  text-transform: uppercase;
+  transition: all 0.5s;
+}
+
+.p-pagelayout-title:hover {
+  color: var(--dark-color);
+}
+
+.p-pagelayout-container {
+  padding-top: 3em;
+}

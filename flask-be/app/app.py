@@ -7,7 +7,6 @@ import os
 # Create app
 app = Flask(__name__)
 app.config.from_object('config')
-app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static/uploads')
 
 # Connect database and import models
 db = SQLAlchemy(app)

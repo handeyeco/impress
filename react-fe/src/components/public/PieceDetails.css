@@ -1,0 +1,39 @@
+.p-piecedetails-container {
+  width: 80%;
+  max-width: 90ch;
+  margin: 8vh auto 5em;
+}
+
+.p-piecedetails-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.p-piecedetails-img {
+  max-width: 30em;
+  max-height: 30em;
+  width: auto;
+  height: auto;
+}
+
+.p-piecedetails-table th {
+  text-align: right;
+  padding: 1em 2em;
+  color: var(--dark-color);
+  font-size: 0.75em;
+}
+
+.p-piecedetails-table tr {
+  border-bottom: 1px solid var(--dark-color);
+}
+
+.p-piecedetails-goldrow {
+  border: 0;
+  border-top: 1px solid var(--dark-color);
+  margin: 2em 0;
+}
+
+.p-piecedetails-description {
+  text-align: justify;
+}

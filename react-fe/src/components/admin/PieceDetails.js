@@ -20,7 +20,7 @@ export const PieceDetails = props => {
           <div className="a-piecedetails-image">
             <img src={p.image_500} alt={p.title} />
           </div>
-          <table className="a-piecedetails-table">
+          <table className="p-piecedetails-table">
             <tbody>
               <tr>
                 <th>Title:</th>

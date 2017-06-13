@@ -1,0 +1,10 @@
+node_modules
+env
+private
+.DS_STORE
+__pycache__
+impress.db
+config.py
+mock.js
+mock
+uploads/*

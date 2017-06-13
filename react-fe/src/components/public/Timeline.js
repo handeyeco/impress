@@ -7,9 +7,9 @@ export const Timeline = props => {
   let art = [...props.art].map((p) => {
     return <Thumbnail key={p.id} piece={p} />
   });
-  
+
   return (
-    <div className="timeline">
+    <div className="p-timeline-flex">
       {art}
     </div>
   )

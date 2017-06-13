@@ -1,0 +1,6 @@
+.p-timeline-flex {
+  display: flex;
+  overflow: scroll;
+  align-items: center;
+  padding: 6vh 3em;
+}
